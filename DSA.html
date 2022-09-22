@@ -1,0 +1,821 @@
+<!DOCTYPE HTML>
+<body>
+	<script>
+/*
+//Stacks
+	function Stack(arr_)
+	{
+	 this.arr=[];
+	 if(arr_)
+	   this.arr=arr_;
+	}
+	
+	Stack.prototype.isEmpty=function()
+	{
+	  return(Boolean(!(this.arr.length)));
+	}
+
+	Stack.prototype.getBuffer=function()
+	{
+	  return (this.arr.slice());
+	}
+ 
+	Stack.prototype.push=function(value)
+	{
+	  this.arr.push(value);
+	}
+
+	Stack.prototype.peek=function()
+	{
+	  return(console.log(this.arr[this.arr.length-1]));
+	}
+	
+	Stack.prototype.pop=function()
+	{
+	  return(this.arr.pop());
+	}
+
+	function Access(stack,n)
+	{
+	  let bufferStack=new Stack(stack.getBuffer());
+	  while(--n!=0)
+		bufferStack.pop();
+
+	  return bufferStack.pop();
+	}
+
+	function Search(stack,element)
+	{
+	  let bufferStack=new Stack(stack.getBuffer());
+	  while(bufferStack.isEmpty())
+	  {
+	    if(element==bufferStack.pop())
+	    {
+	       return true;
+	    }
+	  }
+	  return false;
+	}
+
+
+
+
+	let stk=new Stack();
+	stk.push(5);			// arr=[5]
+	stk.push(6);			// arr=[5,6]
+	stk.pop();			// arr=[5]
+	stk.push(7);			// arr=[5,7]
+	stk.push(8);			// arr=[5,7,8]
+	stk.push(9);			// arr=[5,7,8,9]
+	stk.push(10);			// arr=[5,7,8,9,10]
+	console.log(stk.isEmpty());	// returns false
+	console.log(Access(stk,2));	// returns 9
+	console.log(Search(stk,21));	// returns false
+*/
+
+/*
+	//Queue
+
+	function Queue(arr_)
+	{
+	  this.arr=[];
+	  if(arr_)
+	    this.arr=arr_;
+	}
+
+	Queue.prototype.getBuffer=function()
+	{
+	  return this.arr.slice();
+	}
+
+	Queue.prototype.isEmpty=function()
+	{
+	  return (Boolean(!(this.arr.length)));
+	}
+
+	Queue.prototype.enque=function(value)
+	{
+	  this.arr.push(value);
+	}
+
+	Queue.prototype.deque=function()
+	{
+	  return this.arr.shift();
+	}
+
+	Queue.prototype.peek=function()
+	{
+          return this.arr[0];
+	}
+
+	function queueNAccess(queue,n)
+	{
+	  let bufferQueue=new Queue(queue.getBuffer());
+	  while(--n!=0)
+		bufferQueue.deque();
+	  return bufferQueue.deque();
+	}
+
+	function queueSearch(queue,element)
+	{
+	  let bufferQueue=new Queue(queue.getBuffer());
+	  while(!(bufferQueue.isEmpty()))
+	  {
+	    if(element==bufferQueue.deque())
+		  return true;
+	  }
+	  return false;
+	}
+
+	let Q=new Queue();
+	Q.enque(1);                     // arr=[1]
+	Q.enque(2);			// arr=[1,2]
+	Q.enque(3);			// arr=[1,2,3]
+	Q.enque(4);			// arr=[1,2,3,4]
+	Q.enque(5);			// arr=[1,2,3,4,5]
+	Q.enque(6);			// arr=[1,2,3,4,5,6]
+	Q.deque();			// arr=[2,3,4,5,6]
+	console.log(Q.isEmpty());	// returns false		
+	console.log(Q.peek());		// returns '2'
+	console.log(queueSearch(Q,9));	// returns false
+	console.log(queueNAccess(Q,2)); // returns '3'
+*/
+
+/*
+	//Implementation of singlyLinkedList
+
+	function singleLinkedListNode(val)
+	{//element must always have a next ptr & head!
+		this.head=val;
+		this.next=null;
+	}
+
+	function singleLinkedList()
+	{
+		this.head=null;
+		this.size=0;
+	}
+
+	var sll=new singleLinkedList();
+
+	singleLinkedList.prototype.insert=function(val)
+		      {
+			if(this.head==null)
+			      this.head=new singleLinkedListNode(val);
+			else
+			    {
+			      let temp=this.head;
+			      this.head=new singleLinkedListNode(val);
+			      this.head.next=temp;
+			    }
+			this.size++;
+		      }
+       
+       singleLinkedList.prototype.deletion=
+	function(val)
+	{
+	 let currentHead=this.head;
+	 if(currentHead.head==val)
+	 {
+	  this.head=currentHead.next;
+	  this.size--;
+	 }
+	 else
+	 {
+	    let prev=currentHead;
+	    while(currentHead.next)
+	    {
+	     if(currentHead.head==val)
+	     {
+		prev.next=currentHead.next;
+		prev=currentHead;
+		currentHead=currentHead.next;
+		break;
+
+	     }
+	     prev=currentHead;
+	     currentHead=currentHead.next;
+	    }
+	    if(currentHead.head==val)
+	       prev.next=null;
+	    this.size--;
+	}
+
+}
+       singleLinkedList.prototype.search=function(val){
+	       let currentHead=this.head;
+	       if(currentHead.head==null)
+		return;
+	       else{
+		     while(currentHead.next)
+		       {
+	         	 if(currentHead.head==val)
+			  {
+			    console.log(`Found val ${val}`);
+			    break;
+			  }
+			 currentHead=currentHead.next;
+		       }
+		       if(currentHead.head==val && currentHead.next==null)
+			console.log("Found at root");
+	       }
+       }
+
+	singleLinkedList.prototype.deleteHead=function()
+	{
+		let currentElement=this.head;
+		let popped=currentElement;
+		if (currentElement.head==null)
+			alert("Empty Linked List");
+		else if(currentElement.next==null)
+			currentElement.head=null;
+		else
+			currentElement.head=currentElement.next;
+		console.log("element popped is "+popped.head);
+		this.size--;
+	}
+	
+	singleLinkedList.prototype.reverse=function()
+	{
+	  let currentElement=this.head;
+	  let prev=null;
+	  while(this.head)
+	  {
+	     let temp=this.head.next;
+	     this.head.next=prev;
+	     prev=this.head;
+	     if(!temp)
+		break;
+	     this.head=temp;
+	  }
+	}
+
+	singleLinkedList.prototype.duplicate=function()
+	{
+	   let buff={};
+	   let currentElement=this.head;
+	   let prev=null;
+	   while(currentElement)
+	   {
+	     if(buff[currentElement.head])
+	     {
+		prev.next=currentElement.next;
+		currentElement=currentElement.next;
+		this.size--;
+	     }
+	     else
+	     {
+		buff[currentElement.head]=currentElement.head;
+		prev=currentElement;
+		currentElement=currentElement.next;
+	     }
+	   }
+	}
+
+        sll.insert(5);              //5->null
+	sll.insert(10);             //10->5->null
+	sll.insert(15);             //15->10->5->null
+	sll.insert(20);     	    //20->15->10->5->null
+	sll.deletion(5);	    //20->15->10->null
+        sll.search(15);
+        sll.deleteHead();           //15->10->null
+	sll.insert(15);             //15->15->10->null
+	sll.duplicate();            //15->10->null
+        console.log(sll);
+*/
+
+/*
+	//Implementation of doubly Linked List
+
+	function Node(val)
+	{
+		this.head=val;             //this.head allows objects to 
+		this.prev=null;		   //access the variables on its own
+		this.next=null;		   //as let would return undefined
+	}
+	
+	function doublyLinkedList()
+	{
+		this.head=null;
+		this.size=0;
+	}
+	
+	doublyLinkedList.prototype.insertAtHead=function(val)
+	{
+		if(this.head!=null)
+		{
+		   let temp=this.head;
+		   this.head=new Node(val);
+		   this.head.next=temp;
+		   temp.prev=this.head;
+		}
+		else
+		{   
+		   this.head=new Node(val);
+		   this.tail=this.head;
+		}
+		this.size++;
+	}
+	
+	doublyLinkedList.prototype.insertAtTail=function(val)
+	{
+		if(this.tail==null)
+		{
+			this.tail=new Node(val);
+			this.head=this.tail;
+		}
+		else
+		{
+			let temp=this.tail;
+			this.tail=new Node(val);
+			this.tail.prev=temp;
+			temp.next=this.tail;
+		}
+		this.size++;
+	}
+
+	doublyLinkedList.prototype.deleteTail=function()
+	{
+		let currentTail=this.tail;
+		if(this.tail===null)
+		   console.log("Empty");
+		else
+		{
+		   (this.tail).head=null;
+		   this.tail=(this.tail).prev;
+		   this.tail.next=null;
+		}
+		this.size--;
+	}
+
+	doublyLinkedList.prototype.deleteHead=function()
+	{
+		if(this.head==null)
+		   console.log("Empty");
+		else if(this.head==this.tail)
+		   this.head=null;
+		else
+		{
+		   (this.head).head=null;
+		   this.head=(this.head).next;
+		   (this.head.prev)=null;
+		}
+		this.size--;
+	}
+
+	doublyLinkedList.prototype.search=function(val)
+	{
+	   let currentNode=this.head;
+	   while(currentNode)
+	   {
+	     if(currentNode.head==val)
+		return(console.log("Found"));
+	     currentNode=currentNode.next;
+	   }
+	   console.log("Not Found");
+	}
+
+
+	let dll=new doublyLinkedList();
+	dll.insertAtHead(1);
+	dll.insertAtHead(10);
+	dll.insertAtHead(100);
+	dll.insertAtTail(101);
+	dll.deleteTail();
+        dll.deleteHead();
+	dll.search(10);
+	console.log(dll);	   
+*/
+
+
+
+		            //Binary Search Tree
+
+function BSTNode(value)
+{
+	this.value=value;
+	this.left=null;
+	this.right=null;
+}
+
+function BinarySearchTree()
+{
+	this._root=null;
+}
+
+BinarySearchTree.prototype.insert=function(value)
+{
+   let node=new BSTNode(value);
+   if(!this._root)
+	this._root=node;
+   else
+   {
+     let currentNode=this._root;
+     while(true)
+     {
+        if(currentNode.value>node.value)
+        {
+	   if(!currentNode.left)
+	   {    
+	     currentNode.left=node;
+	     break;
+	   }
+	   currentNode=currentNode.left;
+        }
+	else if(node.value>currentNode.value)
+	{
+	   if(!currentNode.right)
+	   {
+	    currentNode.right=node;
+	    break;
+	   }
+           currentNode=currentNode.right;
+        }
+        else
+	   break;
+    }
+   }
+}
+
+BinarySearchTree.prototype.deletion=function(value)
+{
+   function findRightTreeMin(root)
+   {
+      while(root.left)
+         root=root.left;
+      return root;
+   }
+
+   function recursiveDeletion(root,value)
+   {
+	   
+      if(!root)
+	return null;
+      else if(value<root.value)
+      {
+	 root.left=recursiveDeletion(root.left,value);
+      }
+      else if(value>root.value)
+      {
+	 root.right=recursiveDeletion(root.right,value);
+      }
+      else
+      {
+	 if(!root.left && !root.right)
+	      return null;
+	 else if(!root.left)
+	      return root.right;
+	 else if(!root.right)
+	      return root.left;
+	 else
+	 {
+	   let temp=findRightTreeMin(root.right);
+	   root.value=temp.value;
+	   root.right=recursiveDeletion(root.right,temp.value);
+	 }
+      }
+      return root;
+   }
+   recursiveDeletion(this._root,value);
+}
+
+BinarySearchTree.prototype.search=function(value)
+{
+  let currentNode=this._root;
+  while(currentNode)
+  {
+     if(value<currentNode.value)
+        currentNode=currentNode.left;
+     else if(value>currentNode.value)
+	currentNode=currentNode.right;
+     else
+	return (console.log("Found"));
+  }
+  console.log("Not Found");
+}
+/*
+let BST=new BinarySearchTree();
+BST.insert(10);
+BST.insert(4);
+BST.insert(21);
+BST.insert(5);
+BST.insert(50);
+BST.insert(3);
+BST.insert(11);
+BST.insert(40);
+BST.insert(70);
+BST.deletion(21);
+BST.search(21);                        //Not Found
+BST.search(4);                         //Found
+console.log(BST);
+*/
+
+/*
+				//LRU
+
+function LRUNode(key,value)
+{
+   this.key=key;
+   this.value=value;
+   this.prev=null;
+   this.next=null;
+}
+
+function LRUCache(capacity)
+{
+   this.keys={};                        //A hash table
+   this.head=new LRUNode('',null);
+   this.tail=new LRUNode('',null);
+   this.capacity=capacity;
+   this.head.next=this.tail;
+   this.tail.prev=this.head;
+}
+
+LRUCache.prototype.addNode=function(node)
+{
+   let realTail=this.tail.prev;
+
+   node.prev=realTail;
+   realTail.next=node;
+   node.next=this.tail;
+   this.tail.prev=node;
+}
+
+LRUCache.prototype.delNode=function(node)
+{
+   let prevNode=node.prev;
+   let nextNode=node.next;
+   prevNode.next=nextNode;
+   nextNode.prev=prevNode;
+}
+
+LRUCache.prototype.set=function(key,value)
+{
+   let node=this.keys[key];
+   
+   if(node)
+      this.delNode(node);
+   
+   node=new LRUNode(key,value);
+   this.keys[key]=node;
+   this.addNode(node);
+
+   if(this.capacity<Object.keys(this.keys).length)
+   {
+      let realHead=this.head.next;
+      this.delNode(realHead);
+      delete this.keys[realHead.key];
+   }
+
+}
+
+LRUCache.prototype.get=function(key)
+{
+   let node=this.keys[key];
+   if(node==undefined)
+      return null;
+   else
+   {
+      this.delNode(node);
+      this.addNode(node);
+      return node.value;
+   }
+}
+
+let myLRU=new LRUCache(5);
+myLRU.set(1,1);				//1
+myLRU.set(2,'b');			//1<->b
+myLRU.set(3,3);				//1<->b<->3
+myLRU.set(4,4);				//1<->b<->3<->4
+myLRU.set(5,'e');			//1<->b<->3<->4<->e
+myLRU.set(6,'f');			//b<->3<->4<->e<->f
+myLRU.set(7,7);				//3<->4<->5<->f<->7
+console.log(myLRU);
+myLRU.get(4);				//3<->5<->f<->7<->4
+myLRU.get(12);
+
+*/
+
+/*
+			      //HASH TABLES
+
+function hashTable(size)
+{
+   this.size=size;
+   this.keys=new Array(size).fill(null);
+   this.values=new Array(size).fill(null);
+   this.limit=0;
+}
+
+*/
+
+/*
+  			//Linear probing method
+
+hashTable.prototype.put=function(key,value)
+{
+   if(this.size<=this.limit)
+      throw "OVERFLOW";
+   let hashedIndex=this.hash(key);
+   while(this.keys[hashedIndex]!=null)
+   {
+      hashedIndex++;
+      hashedIndex=this.hash(hashedIndex);
+   }
+   this.keys[hashedIndex]=key;
+   this.values[hashedIndex]=value;
+   this.limit++;
+}
+
+				
+hashTable.prototype.get=function(key)
+{
+   let hashedIndex=key % this.size;
+   while(this.keys[hashedIndex]!=null && this.keys[hashedIndex]!=key)
+   {
+      hashedIndex++;
+      hashedIndex=this.hash(hashedIndex);
+   }
+   return this.values[hashedIndex];
+}
+
+hashTable.prototype.hash=function(key)
+{
+   return key % this.size;
+}
+*/
+
+/*
+                           //Quadratic probing
+
+hashTable.prototype.put=function(key,value)
+{
+   let squareNo=0;
+   if(this.size<=this.limit)
+      throw "OVERFLOW";
+   let hashedIndex=this.hash(key);
+   while(this.keys[hashedIndex]!=null)
+   {
+      squareNo++;
+      hashedIndex=hashedIndex + Math.pow(squareNo,2);
+      hashedIndex=this.hash(hashedIndex);
+   }
+   this.keys[hashedIndex]=key;
+   this.values[hashedIndex]=value;
+   this.limit++;
+}
+
+				
+hashTable.prototype.get=function(key)
+{
+   let squareNo=0;
+   let hashedIndex=key % this.size;
+   while(this.keys[hashedIndex]!=null && this.keys[hashedIndex]!=key)
+   {
+      squareNo++;
+      hashedIndex=hashedIndex + Math.pow(squareNo,2);
+      hashedIndex=this.hash(hashedIndex);
+   }
+   return this.values[hashedIndex];
+}
+
+hashTable.prototype.hash=function(key)
+{
+   return key % this.size;
+}
+
+
+let hT=new hashTable(7);
+hT.put(4,'a');
+hT.put(11,'b');
+hT.put(15,3);
+hT.put(18,4);
+console.log(hT.get(11));
+console.log(hT);
+
+*/
+/*
+				//In-order Traversal
+
+BinarySearchTree.prototype.inOrder=function()
+{
+   function traverser(node)
+   {
+      if(!node)
+         return;
+      traverser(node.left);
+      console.log(node.value);
+      traverser(node.right);
+   }
+   traverser(this._root);
+}
+			//Pre-Order Traversal
+
+BinarySearchTree.prototype.preOrder=function()
+{
+   function preOrderTraversal(node)
+   {
+      if(!node)
+         return;
+      console.log(node.value);
+      preOrderTraversal(node.left);
+      preOrderTraversal(node.right);
+   }
+   preOrderTraversal(this._root);
+}
+
+			//Post-order traversal
+
+BinarySearchTree.prototype.postOrder=function()
+{
+   function postOrderTraversal(node)
+   {
+      if(!node)
+	return;
+      postOrderTraversal(node.right);
+      postOrderTraversal(node.left);
+      console.log(node.value);
+   }
+   postOrderTraversal(this._root);
+}
+
+BinarySearchTree.prototype.levelOrder=function()
+{
+   function levelOrderTraversal(node)
+   {
+      let Q=[];
+      Q.push(node);
+      while(Q.length)
+      {
+         node=Q.shift();
+	 console.log(node.value);
+	 if(node.left)
+	   Q.push(node.left)
+	 if(node.right)
+	   Q.push(node.right);
+      }
+   }
+   levelOrderTraversal(this._root);
+}
+
+let traversalBST=new BinarySearchTree();
+let nodeValues=[20,14,4,17,29,24,31,7,3];
+nodeValues.map((val,i)=>traversalBST.insert(val));
+
+traversalBST.preOrder();		// [20,14,4,3,7,17,29,24,31]
+traversalBST.inOrder();			// [3,4,7,14,17,20,24,29,31]
+traversalBST.postOrder();		// [3,7,4,17,14,24,31,29,20]
+traversalBST.levelOrder();		// [20,14,29,4,17,24,31,3,7]
+
+*/
+
+				//Graphs
+
+function unDirectedGraphs()
+{
+   this.edges={};
+}
+
+unDirectedGraphs.prototype.addVertex=function(vertex)
+{
+   this.edges[vertex]={};
+}
+
+unDirectedGraphs.prototype.addEdge=function(vertex1,vertex2,weight=0)
+{
+   this.edges[vertex1][vertex2]=weight;
+   this.edges[vertex2][vertex1]=weight;
+}
+
+unDirectedGraphs.prototype.removeEdge=function(vertex1,vertex2)
+{
+   delete this.edges[vertex1][vertex2];
+   delete this.edges[vertex2][vertex1];
+}
+
+unDirectedGraphs.prototype.removeVertex=function(RIPVertex)
+{
+   for(Adjvertices in this.edges[RIPVertex])
+   {
+      this.removeEdge(RIPVertex,Adjvertices);
+   }
+}
+
+
+let graph=new unDirectedGraphs();
+graph.addVertex(1);
+graph.addVertex(2);
+graph.addVertex(3);
+graph.addVertex(4);
+graph.addVertex(5);
+graph.addEdge(1,2);
+graph.addEdge(2,3,8);
+graph.addEdge(3,4,10);
+graph.addEdge(4,5,100);
+graph.addEdge(1,5,88);
+graph.removeVertex(1);
+console.log(graph);
+
+</script>
+</body>
+</html>
