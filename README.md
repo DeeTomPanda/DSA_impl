@@ -3,7 +3,7 @@ Basic implementation of DSA_JS
 
 <h3>
   <b>
-    As on 22/9/22 followin were implemented 
+    As on 22/9/22 following were implemented 
   </b>
 </h3>
     1)Stack
