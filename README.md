@@ -1,11 +1,11 @@
 # DSA_impl
 Basic implementation of DSA_JS
 
-<h5>
+<h3>
   <b>
     As on 22/9/22 followin were implemented 
   </b>
-</h5>
+</h3>
     1)Stack
     2)Queue
     3)Linked Lists
