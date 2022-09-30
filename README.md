@@ -13,4 +13,10 @@ Basic implementation of DSA_JS
     5)Binary Search Tree <br/>
     6)Hash Table(linear and quadratic probing) <br/> 
     7)Tree Traversals(PreOrder,InOrder,PostOrder,Level Order) <br/>
-    8)Graphs basics
+    8)Graphs basics<br/>
+    
+<h3>
+<b>As of 30/9/22</b>
+  
+  9)BFS & DFS Traversal in Graphs<br/>
+  10)Dijkstra's Algorithm<br/>
