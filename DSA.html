@@ -771,6 +771,8 @@ traversalBST.levelOrder();		// [20,14,29,4,17,24,31,3,7]
 
 				//Graphs
 
+
+				//Undirected Graphs	
 function unDirectedGraphs()
 {
    this.edges={};
@@ -799,9 +801,90 @@ unDirectedGraphs.prototype.removeVertex=function(RIPVertex)
    {
       this.removeEdge(RIPVertex,Adjvertices);
    }
+   delete this.edges[RIPVertex];
+}
+
+unDirectedGraphs.prototype.BFS=function(vertex)
+{
+   let Q=[];
+   let count=0;
+   let checked={};
+   Q.push(vertex);
+   while(Q.length)
+   {
+      console.log("Count is "+count);
+      count++;
+      let vertex=Q.shift();
+      if(!checked[vertex])
+      {
+         console.log(vertex);
+	 checked[vertex]=true;
+	 for(adjVertex in this.edges[vertex])
+	 {
+	    Q.push(adjVertex);
+	 }
+      }
+   }
+}
+
+unDirectedGraphs.prototype.DFS=function(vertex,visited={})
+{
+   console.log("The visited is "+JSON.stringify(visited))
+   visited[vertex]=true;
+   console.log(vertex);
+   for(adjVertex in this.edges[vertex])
+   {
+     if(!visited[adjVertex])
+	this.DFS(adjVertex,visited);
+   }
+   console.log("Visited is "+JSON.stringify(visited));
+}
+
+unDirectedGraphs.prototype.Dijkstra=function(source)
+{
+   function isEmpty(Vcopy)
+   {
+      return(Object.keys(Vcopy)==0);
+   }
+
+   function findMin(Vcopy,distances)
+   {
+      let minDist=Infinity;
+      let minDistVertex=Infinity;
+      for(vertex in Vcopy)
+      {
+	 if(distances[vertex]<minDist)
+	 {
+	    minDist=distances[vertex];
+	    minDistVertex=vertex;
+	 }
+      }
+      return minDistVertex;
+   }
+ let Vcopy={},distances={};
+ for(vertex in this.edges)
+ {
+    Vcopy[vertex]=this.edges[vertex];
+    distances[vertex]=Infinity;
+ }
+ distances[source]=0;
+ while(!isEmpty(Vcopy))
+ {
+    let nearestV=findMin(Vcopy,distances);
+    delete Vcopy[nearestV];
+
+    for(neighbour in this.edges[nearestV])
+    {
+       let alt=distances[nearestV]+this.edges[nearestV][neighbour];
+       if(alt<distances[neighbour])
+	  distances[neighbour]=alt;
+    }
+ }
+ console.log(distances);
 }
 
 
+/*
 let graph=new unDirectedGraphs();
 graph.addVertex(1);
 graph.addVertex(2);
@@ -815,6 +898,190 @@ graph.addEdge(4,5,100);
 graph.addEdge(1,5,88);
 graph.removeVertex(1);
 console.log(graph);
+*/
+
+/*	
+let DijkstrasGraph=new unDirectedGraphs();
+['A','B','C','D','E'].map((v,i)=>DijkstrasGraph.addVertex(v));
+DijkstrasGraph.addEdge('A','B',12);
+DijkstrasGraph.addEdge('A','C',8);
+DijkstrasGraph.addEdge('A','D',33);
+DijkstrasGraph.addEdge('B','E',8);
+DijkstrasGraph.addEdge('C','E',21);
+DijkstrasGraph.addEdge('D','E',1);
+
+DijkstrasGraph.Dijkstra('A');		//{A:0,B:12,C:8,D:21,E:20}
+*/
+
+/*
+let BFSgraph=new unDirectedGraphs();
+[1,2,3,4,5].map((v,i)=>BFSgraph.addVertex(v));
+BFSgraph.addEdge(1,2);
+BFSgraph.addEdge(1,4);
+BFSgraph.addEdge(2,3);
+BFSgraph.addEdge(4,5);
+BFSgraph.addEdge(3,5);
+BFSgraph.DFS(1);				//[1,2,3,5,4]
+BFSgraph.BFS(1);				//[1,2,4,3,5]
+*/
+
+/*
+			//Directed Graphs
+function DirectedGraphs()
+{
+   this.edges={};
+}
+
+DirectedGraphs.prototype.addVertex=function(vertex)
+{
+   this.edges[vertex]={};
+}
+
+DirectedGraphs.prototype.addEdges=function(origVertex,destVertex,weight=0)
+{
+   this.edges[origVertex][destVertex]=weight;
+}
+
+DirectedGraphs.prototype.removeEdges=function(origVertex,destVertex)
+{
+if(this.edges[origVertex] && this.edges[origVertex][destVertex]!=undefined)
+   delete this.edges[origVertex][destVertex];
+}
+
+DirectedGraphs.prototype.removeVertex=function(vertex)
+{
+  for(destVertices in this.edges[vertex])
+   {
+     this.removeEdges(vertex,destVertices);
+   }
+  delete this.edges[vertex];
+}
+
+DirectedGraphs.prototype.BreadthFirstSearch=function(vertex)
+{
+   let Q=[];
+   let visited={};
+   Q.push(vertex);
+   while(Q.length)
+   {
+      let value=Q.shift();
+      if(!visited[value])
+      {
+         console.log(value);
+	 visited[value]=true;
+         for(destVertices in this.edges[value])
+         Q.push(destVertices);
+      }
+   }
+}
+
+DirectedGraphs.prototype.DFS=function(vertex,visited={})
+{
+   console.log(vertex);
+   visited[vertex]=true;
+   for(adjVertex in this.edges[vertex])
+   {
+      if(!visited[adjVertex])
+	 this.DFS(adjVertex,visited);
+   }
+}
+
+DirectedGraphs.prototype.Dijkstra=function(vertex)
+{
+   function isEmpty(Q)
+   {
+     return (Object.keys(Q).length===0);
+   }
+   
+   function findMin(Q,dist)
+   {
+      let minDist=Infinity;
+      let minDistNode=null;
+      
+      for(adjVertex in Q)
+      {
+	if(dist[adjVertex]<=minDist)
+	{
+	   minDist=dist[adjVertex];
+	   minDistNode=adjVertex;
+	}
+      }
+      return minDistNode;
+    }
+
+       let Q={},dist={};
+       for(vertices in this.edges)
+       {
+	  Q[vertices]=this.edges[vertices];
+	  dist[vertices]=Infinity;
+       }
+       dist[vertex]=0;
+       while(!isEmpty(Q))
+       {
+	  let u=findMin(Q,dist);
+	  delete Q[u];
+	 
+          for(neighbour in this.edges[u])
+	  {
+	    let alt=dist[u]+this.edges[u][neighbour];
+	    if(alt<dist[neighbour])
+	      dist[neighbour]=alt;
+	  }
+       }
+       console.log(dist);
+    
+}
+	
+*/
+
+/*
+let Dgraph=new DirectedGraphs();
+Dgraph.addVertex('A');
+Dgraph.addVertex('B');
+Dgraph.addVertex('C');
+Dgraph.addEdges('A','B',12);
+Dgraph.addEdges('B','C');
+Dgraph.addVertex('D');
+Dgraph.addVertex('E');
+Dgraph.addVertex('F');
+Dgraph.addVertex('G');
+Dgraph.addVertex('H');
+Dgraph.addVertex('I');
+Dgraph.addEdges('B','D',22);
+Dgraph.addEdges('D','I');
+Dgraph.addEdges('C','E');
+Dgraph.addEdges('C','F',19);
+Dgraph.addEdges('C','G');
+Dgraph.addEdges('C','H');
+Dgraph.addEdges('H','A');
+//Dgraph.removeVertex('A');
+console.log(Dgraph);
+Dgraph.BreadthFirstSearch('A');
+*/
+
+/*
+let D2Graph=new DirectedGraphs();
+[1,2,3,4,5].map((v,i)=>D2Graph.addVertex(v));
+D2Graph.addEdges(1,2);
+D2Graph.addEdges(1,3);
+D2Graph.addEdges(2,4);
+D2Graph.addEdges(3,5);
+
+D2Graph.DFS();					//[1,2,4,3,5]
+D2Graph.BreadthFirstSearch(1);			//[1,2,3,4,5]
+*/
+
+/*	
+['A','B','C','D','E'].map((v,i)=>D2Graph.addVertex(v));	
+D2Graph.addEdges('A','B',12);
+D2Graph.addEdges('A','C',15);
+D2Graph.addEdges('A','D',7);
+D2Graph.addEdges('B','E',4);
+D2Graph.addEdges('D','E',19);
+D2Graph.addEdges('C','E',4);
+
+D2Graph.Dijkstra('A');				//{A:0,B:12,C:15,D:7,E:16}
+*/
 
 </script>
 </body>
