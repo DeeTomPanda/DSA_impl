@@ -21,3 +21,9 @@ Basic implementation of DSA_JS
   
   9)BFS & DFS Traversal in Graphs<br/>
   10)Dijkstra's Algorithm<br/>
+
+<h3>
+<b>As of 8/10/22</b>
+</h3>
+
+  11)Min & Max Heaps
