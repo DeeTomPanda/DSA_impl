@@ -1,3 +1,4 @@
+
 <!DOCTYPE HTML>
 <body>
 	<script>
@@ -14,7 +15,6 @@
 	{
 	  return(Boolean(!(this.arr.length)));
 	}
-
 	Stack.prototype.getBuffer=function()
 	{
 	  return (this.arr.slice());
@@ -24,7 +24,6 @@
 	{
 	  this.arr.push(value);
 	}
-
 	Stack.prototype.peek=function()
 	{
 	  return(console.log(this.arr[this.arr.length-1]));
@@ -34,16 +33,13 @@
 	{
 	  return(this.arr.pop());
 	}
-
 	function Access(stack,n)
 	{
 	  let bufferStack=new Stack(stack.getBuffer());
 	  while(--n!=0)
 		bufferStack.pop();
-
 	  return bufferStack.pop();
 	}
-
 	function Search(stack,element)
 	{
 	  let bufferStack=new Stack(stack.getBuffer());
@@ -56,10 +52,6 @@
 	  }
 	  return false;
 	}
-
-
-
-
 	let stk=new Stack();
 	stk.push(5);			// arr=[5]
 	stk.push(6);			// arr=[5,6]
@@ -75,39 +67,32 @@
 
 /*
 	//Queue
-
 	function Queue(arr_)
 	{
 	  this.arr=[];
 	  if(arr_)
 	    this.arr=arr_;
 	}
-
 	Queue.prototype.getBuffer=function()
 	{
 	  return this.arr.slice();
 	}
-
 	Queue.prototype.isEmpty=function()
 	{
 	  return (Boolean(!(this.arr.length)));
 	}
-
 	Queue.prototype.enque=function(value)
 	{
 	  this.arr.push(value);
 	}
-
 	Queue.prototype.deque=function()
 	{
 	  return this.arr.shift();
 	}
-
 	Queue.prototype.peek=function()
 	{
           return this.arr[0];
 	}
-
 	function queueNAccess(queue,n)
 	{
 	  let bufferQueue=new Queue(queue.getBuffer());
@@ -115,7 +100,6 @@
 		bufferQueue.deque();
 	  return bufferQueue.deque();
 	}
-
 	function queueSearch(queue,element)
 	{
 	  let bufferQueue=new Queue(queue.getBuffer());
@@ -126,7 +110,6 @@
 	  }
 	  return false;
 	}
-
 	let Q=new Queue();
 	Q.enque(1);                     // arr=[1]
 	Q.enque(2);			// arr=[1,2]
@@ -143,21 +126,17 @@
 
 /*
 	//Implementation of singlyLinkedList
-
 	function singleLinkedListNode(val)
 	{//element must always have a next ptr & head!
 		this.head=val;
 		this.next=null;
 	}
-
 	function singleLinkedList()
 	{
 		this.head=null;
 		this.size=0;
 	}
-
 	var sll=new singleLinkedList();
-
 	singleLinkedList.prototype.insert=function(val)
 		      {
 			if(this.head==null)
@@ -191,7 +170,6 @@
 		prev=currentHead;
 		currentHead=currentHead.next;
 		break;
-
 	     }
 	     prev=currentHead;
 	     currentHead=currentHead.next;
@@ -200,7 +178,6 @@
 	       prev.next=null;
 	    this.size--;
 	}
-
 }
        singleLinkedList.prototype.search=function(val){
 	       let currentHead=this.head;
@@ -220,7 +197,6 @@
 			console.log("Found at root");
 	       }
        }
-
 	singleLinkedList.prototype.deleteHead=function()
 	{
 		let currentElement=this.head;
@@ -249,7 +225,6 @@
 	     this.head=temp;
 	  }
 	}
-
 	singleLinkedList.prototype.duplicate=function()
 	{
 	   let buff={};
@@ -271,7 +246,6 @@
 	     }
 	   }
 	}
-
         sll.insert(5);              //5->null
 	sll.insert(10);             //10->5->null
 	sll.insert(15);             //15->10->5->null
@@ -286,7 +260,6 @@
 
 /*
 	//Implementation of doubly Linked List
-
 	function Node(val)
 	{
 		this.head=val;             //this.head allows objects to 
@@ -333,7 +306,6 @@
 		}
 		this.size++;
 	}
-
 	doublyLinkedList.prototype.deleteTail=function()
 	{
 		let currentTail=this.tail;
@@ -347,7 +319,6 @@
 		}
 		this.size--;
 	}
-
 	doublyLinkedList.prototype.deleteHead=function()
 	{
 		if(this.head==null)
@@ -362,7 +333,6 @@
 		}
 		this.size--;
 	}
-
 	doublyLinkedList.prototype.search=function(val)
 	{
 	   let currentNode=this.head;
@@ -374,8 +344,6 @@
 	   }
 	   console.log("Not Found");
 	}
-
-
 	let dll=new doublyLinkedList();
 	dll.insertAtHead(1);
 	dll.insertAtHead(10);
@@ -512,7 +480,6 @@ console.log(BST);
 
 /*
 				//LRU
-
 function LRUNode(key,value)
 {
    this.key=key;
@@ -520,7 +487,6 @@ function LRUNode(key,value)
    this.prev=null;
    this.next=null;
 }
-
 function LRUCache(capacity)
 {
    this.keys={};                        //A hash table
@@ -530,17 +496,14 @@ function LRUCache(capacity)
    this.head.next=this.tail;
    this.tail.prev=this.head;
 }
-
 LRUCache.prototype.addNode=function(node)
 {
    let realTail=this.tail.prev;
-
    node.prev=realTail;
    realTail.next=node;
    node.next=this.tail;
    this.tail.prev=node;
 }
-
 LRUCache.prototype.delNode=function(node)
 {
    let prevNode=node.prev;
@@ -548,7 +511,6 @@ LRUCache.prototype.delNode=function(node)
    prevNode.next=nextNode;
    nextNode.prev=prevNode;
 }
-
 LRUCache.prototype.set=function(key,value)
 {
    let node=this.keys[key];
@@ -559,16 +521,13 @@ LRUCache.prototype.set=function(key,value)
    node=new LRUNode(key,value);
    this.keys[key]=node;
    this.addNode(node);
-
    if(this.capacity<Object.keys(this.keys).length)
    {
       let realHead=this.head.next;
       this.delNode(realHead);
       delete this.keys[realHead.key];
    }
-
 }
-
 LRUCache.prototype.get=function(key)
 {
    let node=this.keys[key];
@@ -581,7 +540,6 @@ LRUCache.prototype.get=function(key)
       return node.value;
    }
 }
-
 let myLRU=new LRUCache(5);
 myLRU.set(1,1);				//1
 myLRU.set(2,'b');			//1<->b
@@ -593,12 +551,10 @@ myLRU.set(7,7);				//3<->4<->5<->f<->7
 console.log(myLRU);
 myLRU.get(4);				//3<->5<->f<->7<->4
 myLRU.get(12);
-
 */
 
 /*
 			      //HASH TABLES
-
 function hashTable(size)
 {
    this.size=size;
@@ -606,12 +562,10 @@ function hashTable(size)
    this.values=new Array(size).fill(null);
    this.limit=0;
 }
-
 */
 
 /*
   			//Linear probing method
-
 hashTable.prototype.put=function(key,value)
 {
    if(this.size<=this.limit)
@@ -626,7 +580,6 @@ hashTable.prototype.put=function(key,value)
    this.values[hashedIndex]=value;
    this.limit++;
 }
-
 				
 hashTable.prototype.get=function(key)
 {
@@ -638,7 +591,6 @@ hashTable.prototype.get=function(key)
    }
    return this.values[hashedIndex];
 }
-
 hashTable.prototype.hash=function(key)
 {
    return key % this.size;
@@ -647,7 +599,6 @@ hashTable.prototype.hash=function(key)
 
 /*
                            //Quadratic probing
-
 hashTable.prototype.put=function(key,value)
 {
    let squareNo=0;
@@ -664,7 +615,6 @@ hashTable.prototype.put=function(key,value)
    this.values[hashedIndex]=value;
    this.limit++;
 }
-
 				
 hashTable.prototype.get=function(key)
 {
@@ -678,13 +628,10 @@ hashTable.prototype.get=function(key)
    }
    return this.values[hashedIndex];
 }
-
 hashTable.prototype.hash=function(key)
 {
    return key % this.size;
 }
-
-
 let hT=new hashTable(7);
 hT.put(4,'a');
 hT.put(11,'b');
@@ -692,11 +639,9 @@ hT.put(15,3);
 hT.put(18,4);
 console.log(hT.get(11));
 console.log(hT);
-
 */
 /*
 				//In-order Traversal
-
 BinarySearchTree.prototype.inOrder=function()
 {
    function traverser(node)
@@ -710,7 +655,6 @@ BinarySearchTree.prototype.inOrder=function()
    traverser(this._root);
 }
 			//Pre-Order Traversal
-
 BinarySearchTree.prototype.preOrder=function()
 {
    function preOrderTraversal(node)
@@ -723,9 +667,7 @@ BinarySearchTree.prototype.preOrder=function()
    }
    preOrderTraversal(this._root);
 }
-
 			//Post-order traversal
-
 BinarySearchTree.prototype.postOrder=function()
 {
    function postOrderTraversal(node)
@@ -738,7 +680,6 @@ BinarySearchTree.prototype.postOrder=function()
    }
    postOrderTraversal(this._root);
 }
-
 BinarySearchTree.prototype.levelOrder=function()
 {
    function levelOrderTraversal(node)
@@ -757,20 +698,19 @@ BinarySearchTree.prototype.levelOrder=function()
    }
    levelOrderTraversal(this._root);
 }
-
 let traversalBST=new BinarySearchTree();
 let nodeValues=[20,14,4,17,29,24,31,7,3];
 nodeValues.map((val,i)=>traversalBST.insert(val));
-
 traversalBST.preOrder();		// [20,14,4,3,7,17,29,24,31]
 traversalBST.inOrder();			// [3,4,7,14,17,20,24,29,31]
 traversalBST.postOrder();		// [3,7,4,17,14,24,31,29,20]
 traversalBST.levelOrder();		// [20,14,29,4,17,24,31,3,7]
-
 */
 
 				//Graphs
 
+
+				//Undirected Graphs	
 function unDirectedGraphs()
 {
    this.edges={};
@@ -799,9 +739,90 @@ unDirectedGraphs.prototype.removeVertex=function(RIPVertex)
    {
       this.removeEdge(RIPVertex,Adjvertices);
    }
+   delete this.edges[RIPVertex];
+}
+
+unDirectedGraphs.prototype.BFS=function(vertex)
+{
+   let Q=[];
+   let count=0;
+   let checked={};
+   Q.push(vertex);
+   while(Q.length)
+   {
+      console.log("Count is "+count);
+      count++;
+      let vertex=Q.shift();
+      if(!checked[vertex])
+      {
+         console.log(vertex);
+	 checked[vertex]=true;
+	 for(adjVertex in this.edges[vertex])
+	 {
+	    Q.push(adjVertex);
+	 }
+      }
+   }
+}
+
+unDirectedGraphs.prototype.DFS=function(vertex,visited={})
+{
+   console.log("The visited is "+JSON.stringify(visited))
+   visited[vertex]=true;
+   console.log(vertex);
+   for(adjVertex in this.edges[vertex])
+   {
+     if(!visited[adjVertex])
+	this.DFS(adjVertex,visited);
+   }
+   console.log("Visited is "+JSON.stringify(visited));
+}
+
+unDirectedGraphs.prototype.Dijkstra=function(source)
+{
+   function isEmpty(Vcopy)
+   {
+      return(Object.keys(Vcopy)==0);
+   }
+
+   function findMin(Vcopy,distances)
+   {
+      let minDist=Infinity;
+      let minDistVertex=Infinity;
+      for(vertex in Vcopy)
+      {
+	 if(distances[vertex]<minDist)
+	 {
+	    minDist=distances[vertex];
+	    minDistVertex=vertex;
+	 }
+      }
+      return minDistVertex;
+   }
+ let Vcopy={},distances={};
+ for(vertex in this.edges)
+ {
+    Vcopy[vertex]=this.edges[vertex];
+    distances[vertex]=Infinity;
+ }
+ distances[source]=0;
+ while(!isEmpty(Vcopy))
+ {
+    let nearestV=findMin(Vcopy,distances);
+    delete Vcopy[nearestV];
+
+    for(neighbour in this.edges[nearestV])
+    {
+       let alt=distances[nearestV]+this.edges[nearestV][neighbour];
+       if(alt<distances[neighbour])
+	  distances[neighbour]=alt;
+    }
+ }
+ console.log(distances);
 }
 
 
+/*
 let graph=new unDirectedGraphs();
 graph.addVertex(1);
 graph.addVertex(2);
@@ -815,6 +836,343 @@ graph.addEdge(4,5,100);
 graph.addEdge(1,5,88);
 graph.removeVertex(1);
 console.log(graph);
+*/
+
+/*	
+let DijkstrasGraph=new unDirectedGraphs();
+['A','B','C','D','E'].map((v,i)=>DijkstrasGraph.addVertex(v));
+DijkstrasGraph.addEdge('A','B',12);
+DijkstrasGraph.addEdge('A','C',8);
+DijkstrasGraph.addEdge('A','D',33);
+DijkstrasGraph.addEdge('B','E',8);
+DijkstrasGraph.addEdge('C','E',21);
+DijkstrasGraph.addEdge('D','E',1);
+DijkstrasGraph.Dijkstra('A');		//{A:0,B:12,C:8,D:21,E:20}
+*/
+
+/*
+let BFSgraph=new unDirectedGraphs();
+[1,2,3,4,5].map((v,i)=>BFSgraph.addVertex(v));
+BFSgraph.addEdge(1,2);
+BFSgraph.addEdge(1,4);
+BFSgraph.addEdge(2,3);
+BFSgraph.addEdge(4,5);
+BFSgraph.addEdge(3,5);
+BFSgraph.DFS(1);				//[1,2,3,5,4]
+BFSgraph.BFS(1);				//[1,2,4,3,5]
+*/
+
+/*
+			//Directed Graphs
+function DirectedGraphs()
+{
+   this.edges={};
+}
+DirectedGraphs.prototype.addVertex=function(vertex)
+{
+   this.edges[vertex]={};
+}
+DirectedGraphs.prototype.addEdges=function(origVertex,destVertex,weight=0)
+{
+   this.edges[origVertex][destVertex]=weight;
+}
+DirectedGraphs.prototype.removeEdges=function(origVertex,destVertex)
+{
+if(this.edges[origVertex] && this.edges[origVertex][destVertex]!=undefined)
+   delete this.edges[origVertex][destVertex];
+}
+DirectedGraphs.prototype.removeVertex=function(vertex)
+{
+  for(destVertices in this.edges[vertex])
+   {
+     this.removeEdges(vertex,destVertices);
+   }
+  delete this.edges[vertex];
+}
+DirectedGraphs.prototype.BreadthFirstSearch=function(vertex)
+{
+   let Q=[];
+   let visited={};
+   Q.push(vertex);
+   while(Q.length)
+   {
+      let value=Q.shift();
+      if(!visited[value])
+      {
+         console.log(value);
+	 visited[value]=true;
+         for(destVertices in this.edges[value])
+         Q.push(destVertices);
+      }
+   }
+}
+DirectedGraphs.prototype.DFS=function(vertex,visited={})
+{
+   console.log(vertex);
+   visited[vertex]=true;
+   for(adjVertex in this.edges[vertex])
+   {
+      if(!visited[adjVertex])
+	 this.DFS(adjVertex,visited);
+   }
+}
+DirectedGraphs.prototype.Dijkstra=function(vertex)
+{
+   function isEmpty(Q)
+   {
+     return (Object.keys(Q).length===0);
+   }
+   
+   function findMin(Q,dist)
+   {
+      let minDist=Infinity;
+      let minDistNode=null;
+      
+      for(adjVertex in Q)
+      {
+	if(dist[adjVertex]<=minDist)
+	{
+	   minDist=dist[adjVertex];
+	   minDistNode=adjVertex;
+	}
+      }
+      return minDistNode;
+    }
+       let Q={},dist={};
+       for(vertices in this.edges)
+       {
+	  Q[vertices]=this.edges[vertices];
+	  dist[vertices]=Infinity;
+       }
+       dist[vertex]=0;
+       while(!isEmpty(Q))
+       {
+	  let u=findMin(Q,dist);
+	  delete Q[u];
+	 
+          for(neighbour in this.edges[u])
+	  {
+	    let alt=dist[u]+this.edges[u][neighbour];
+	    if(alt<dist[neighbour])
+	      dist[neighbour]=alt;
+	  }
+       }
+       console.log(dist);
+    
+}
+	
+*/
+
+/*
+let Dgraph=new DirectedGraphs();
+Dgraph.addVertex('A');
+Dgraph.addVertex('B');
+Dgraph.addVertex('C');
+Dgraph.addEdges('A','B',12);
+Dgraph.addEdges('B','C');
+Dgraph.addVertex('D');
+Dgraph.addVertex('E');
+Dgraph.addVertex('F');
+Dgraph.addVertex('G');
+Dgraph.addVertex('H');
+Dgraph.addVertex('I');
+Dgraph.addEdges('B','D',22);
+Dgraph.addEdges('D','I');
+Dgraph.addEdges('C','E');
+Dgraph.addEdges('C','F',19);
+Dgraph.addEdges('C','G');
+Dgraph.addEdges('C','H');
+Dgraph.addEdges('H','A');
+//Dgraph.removeVertex('A');
+console.log(Dgraph);
+Dgraph.BreadthFirstSearch('A');
+*/
+
+/*
+let D2Graph=new DirectedGraphs();
+[1,2,3,4,5].map((v,i)=>D2Graph.addVertex(v));
+D2Graph.addEdges(1,2);
+D2Graph.addEdges(1,3);
+D2Graph.addEdges(2,4);
+D2Graph.addEdges(3,5);
+D2Graph.DFS();					//[1,2,4,3,5]
+D2Graph.BreadthFirstSearch(1);			//[1,2,3,4,5]
+*/
+
+/*	
+['A','B','C','D','E'].map((v,i)=>D2Graph.addVertex(v));	
+D2Graph.addEdges('A','B',12);
+D2Graph.addEdges('A','C',15);
+D2Graph.addEdges('A','D',7);
+D2Graph.addEdges('B','E',4);
+D2Graph.addEdges('D','E',19);
+D2Graph.addEdges('C','E',4);
+D2Graph.Dijkstra('A');				//{A:0,B:12,C:15,D:7,E:16}
+*/
+/*
+					//Heaps
+
+function Heap()
+{
+   let heapArr=[];
+}
+
+Heap.prototype.swap=function(index1,index2)
+{
+   let temp=this.heapArr[index1];
+   this.heapArr[index1]=this.heapArr[index2];
+   this.heapArr[index2]=temp;
+}
+
+Heap.prototype.parentIndex=function(N)
+{
+   return Math.floor((N-1)/2);
+}
+
+Heap.prototype.parent=function(N)
+{
+   return this.heapArr[this.parentIndex(N)];
+}
+
+Heap.prototype.leftChildIndex=function(N)
+{
+   return (N*2)+1;
+}
+
+Heap.prototype.leftChild=function(N)
+{
+   return this.heapArr[this.leftChildIndex(N)];
+}
+
+Heap.prototype.rightChildIndex=function(N)
+{
+   return (N*2)+2;
+}
+
+Heap.prototype.rightChild=function(N)
+{
+   return this.heapArr[this.rightChildIndex(N)];
+}
+*/
+
+/*
+						//Min-Heap
+function MinHeap()
+{
+   this.heapArr=[];
+}
+
+MinHeap.prototype=Object.create(Heap.prototype);
+
+MinHeap.prototype.bubbleUp=function()
+{
+   let index=this.heapArr.length-1;
+   while(this.parent(index) && this.parent(index)>this.heapArr[index])
+   {
+      this.swap(this.parentIndex(index),index);
+      index=this.parentIndex(index);
+   }
+}
+
+MinHeap.prototype.bubbleDown=function()
+{
+   let index=0;
+   while(this.leftChild(index) && 
+	 this.leftChild(index)<this.heapArr[index] || 
+	 this.rightChild(index)<this.heapArr[index])
+   {
+      let small=this.leftChildIndex(index);
+      if(this.rightChild(index) && this.leftChild(index)>this.rightChild(index))
+         small=this.rightChildIndex(index);
+      this.swap(index,small)
+      index=small;
+   }
+}
+
+MinHeap.prototype.add=function(item)
+{
+   if(this.heapArr.indexOf(item)!=-1)
+      return;
+   this.heapArr[this.heapArr.length]=item;
+   this.bubbleUp();
+}
+
+MinHeap.prototype.poll=function()
+{
+   let element=this.heapArr[0];
+   this.heapArr[0]=this.heapArr.pop();
+   console.log(element);
+   this.bubbleDown();
+}
+
+let minHeap=new MinHeap();
+[1,1,2,5,4,3,6,8,7].map((v,i)=>minHeap.add(v));
+console.log(minHeap);					
+minHeap.poll();							//1
+minHeap.poll();							//2
+minHeap.poll();							//3
+minHeap.poll();							//4
+*/						
+/*
+						//Max-Heap
+
+function MaxHeap()
+{
+   this.heapArr=[];
+}
+
+MaxHeap.prototype=Object.create(Heap.prototype);
+
+MaxHeap.prototype.bubbleUp=function()
+{
+   let index=this.heapArr.length-1;
+   while(this.parent(index) && this.parent(index)<this.heapArr[index])
+   {
+      this.swap(this.parentIndex(index),index);
+      index=this.parentIndex(index);
+   }
+}
+
+MaxHeap.prototype.bubbleDown=function()
+{
+   let index=0;
+   while(this.leftChild(index) && 
+	 this.leftChild(index)>this.heapArr[index] || 
+	 this.rightChild(index)>this.heapArr[index])
+   {
+      let big=this.leftChildIndex(index);
+      if(this.rightChild(index) && this.leftChild(index)<this.rightChild(index))
+         big=this.rightChildIndex(index);
+      this.swap(index,big)
+      index=big;
+   }
+}
+
+MaxHeap.prototype.add=function(item)
+{
+   if(this.heapArr.indexOf(item)!=-1)
+      return;
+   this.heapArr[this.heapArr.length]=item;
+   this.bubbleUp();
+}
+
+MaxHeap.prototype.poll=function()
+{
+   let element=this.heapArr[0];
+   this.heapArr[0]=this.heapArr.pop();
+   console.log(element);
+   this.bubbleDown();
+}
+
+let maxHeap=new MaxHeap();
+[1,2,3,4,4,5,3,6,7].map((v,i)=>maxHeap.add(v));
+maxHeap.poll();							//7
+maxHeap.poll();							//6
+maxHeap.poll();							//5
+*/   
+   
+					//Insertion-Sort
+
 
 </script>
 </body>
