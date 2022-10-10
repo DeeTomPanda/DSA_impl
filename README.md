@@ -32,9 +32,9 @@ Basic implementation of DSA_JS
 <b>As of 10/10/22</b>
 </h3>
 
-  12)Bubble Sort
-  13)Insertion Sort
-  14)Quick Sort
-  15)Merge Sort
-  16)Count Sort
+  12)Bubble Sort <br/>
+  13)Insertion Sort <br/>
+  14)Quick Sort <br/>
+  15)Merge Sort <br/>
+  16)Count Sort <br/>
   
